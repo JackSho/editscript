@@ -107,8 +107,8 @@
    (deftype PriorityMap [^:unsynchronized-mutable ^HeapNode heap
                          ^:unsynchronized-mutable map]
      IPersistentCollection
-     (count [_] (count map))
-     (^IPersistentCollection cons [this e]
+     #_(count [_] (count map))
+     #_(^IPersistentCollection cons [this e]
        (let [[item priority] e]
          (set! map (assoc map item priority))
          (set! heap (insert heap item priority))
@@ -120,11 +120,11 @@
      (equiv [this o] (identical? this o))
 
      IPersistentMap
-     (^IPersistentMap assoc [this item priority]
+     #_(^IPersistentMap assoc [this item priority]
        (set! map (assoc map item priority))
        (set! heap (insert heap item priority))
        this)
-     (^clojure.lang.Associative assoc [this item priority]
+     #_(^clojure.lang.Associative assoc [this item priority]
        (set! map (assoc map item priority))
        (set! heap (insert heap item priority))
        this)
