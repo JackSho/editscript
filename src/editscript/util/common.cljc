@@ -13,7 +13,7 @@
   (:require [editscript.edit :as e]
             [clojure.string :as s]))
 
-#?(:clj (set! *warn-on-reflection* true))
+;; #?(:clj (set! *warn-on-reflection* true))
 #?(:clj (set! *unchecked-math* :warn-on-boxed))
 
 (defn szudzik
@@ -32,7 +32,7 @@
 
 (defn current-time
   ^long []
-  #?(:clj (System/currentTimeMillis) 
+  #?(:clj (System/currentTimeMillis)
      :cljr (.ToUnixTimeMilliseconds (DateTimeOffset/Now))
   :cljs (.getTime (js/Date.))))
 
