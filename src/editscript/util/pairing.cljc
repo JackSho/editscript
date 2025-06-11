@@ -157,7 +157,6 @@
          this))
 
      IAssociative
-     IAssociative
      (-assoc [this item priority]
        (set! map (assoc map item priority))
        (set! heap (insert heap item priority))
