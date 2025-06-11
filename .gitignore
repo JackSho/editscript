@@ -19,3 +19,9 @@ pom.xml.asc
 */.lein-env
 */.nrepl-port
 */target/
+.clj-kondo
+.lsp
+build
+deps
+.calva
+.cpcache
