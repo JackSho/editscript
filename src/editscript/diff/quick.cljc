@@ -16,7 +16,7 @@
 
 #?(:clj (set! *warn-on-reflection* true))
 #?(:clj (set! *unchecked-math* :warn-on-boxed))
-#?(:cljr (set! *warn-on-reflection* true))
+;; #?(:cljr (set! *warn-on-reflection* true))
 
 (declare diff*)
 
