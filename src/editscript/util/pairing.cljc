@@ -11,7 +11,10 @@
 (ns ^:no-doc editscript.util.pairing
   #?(:clj
      (:import [clojure.lang IPersistentStack IPersistentMap IPersistentCollection]
-              [java.io Writer])))
+              [java.io Writer])
+	  :cljr
+     (:import [clojure.lang IPersistentStack IPersistentMap IPersistentCollection]
+              )))
 
 #?(:clj (set! *warn-on-reflection* true))
 
@@ -100,7 +103,45 @@
          (set! map (dissoc map (.-item heap)))
          (set! heap n)
          this)))
+:cljr
+   (deftype PriorityMap [^:unsynchronized-mutable ^HeapNode heap
+                         ^:unsynchronized-mutable map]
+     IPersistentCollection
+     #_(count [_] (count map))
+     #_(^IPersistentCollection cons [this e]
+       (let [[item priority] e]
+         (set! map (assoc map item priority))
+         (set! heap (insert heap item priority))
+         this))
+     (empty [this]
+       (set! heap nil)
+       (set! map {})
+       this)
+     (equiv [this o] (identical? this o))
 
+     IPersistentMap
+     #_(^IPersistentMap assoc [this item priority]
+       (set! map (assoc map item priority))
+       (set! heap (insert heap item priority))
+       this)
+     #_(^clojure.lang.Associative assoc [this item priority]
+       (set! map (assoc map item priority))
+       (set! heap (insert heap item priority))
+       this)
+     (GetHashCode [_] (hash map))
+     (Equals [this o] (identical? this o))
+     (containsKey [_ item] (contains? map item))
+     (entryAt [_ k] (find map k))
+     (seq [_] (seq map))
+     (without [this item] (dissoc map item) this)
+
+     IPersistentStack
+     (peek [_] [(.-item heap) (.-priority heap)])
+     (pop [this]
+       (let [n (two-pass (get-left heap))]
+         (set! map (dissoc map (.-item heap)))
+         (set! heap n)
+         this)))
    :cljs
    (deftype PriorityMap [^:mutable ^HeapNode heap
                          ^:mutable map]

@@ -1,0 +1,7 @@
+{:name         editscript
+ :version      "0.6.7-SNAPSHOT"
+ :description  "editscript"
+ :source-paths ["src" "test"]
+ :dependencies [[:github skydread1/clr.test.check "magic"
+                 :sha "a23fe55e8b51f574a63d6b904e1f1299700153ed"
+                 :paths ["src"]]]}
