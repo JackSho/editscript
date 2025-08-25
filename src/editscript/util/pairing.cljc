@@ -120,7 +120,7 @@
      (equiv [this o] (identical? this o))
 
      IPersistentMap
-     (clojure.lang.IPersistentCollection.count [_] (count map))
+     (clojure.lang.IPersistentMap.count [_] (count map))
      (clojure.lang.IPersistentMap.assoc [this item priority]
        (set! map (assoc map item priority))
        (set! heap (insert heap item priority))
